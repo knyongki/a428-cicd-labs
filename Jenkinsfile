@@ -6,6 +6,11 @@ properties([
 ])
 
 node {
+  stage('Checkout') {
+    // Ambil source code dari repo & branch yg di-set di Jenkins job
+    checkout scm
+  }
+
   stage('Build') {
     docker.image('node:lts-buster-slim').inside('-p 3000:3000') {
       withEnv(['CI=true']) {
